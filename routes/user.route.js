@@ -11,7 +11,7 @@ const bcrypt = require("bcrypt");
 
 
 userRouter.post("/register", async(req, res) => {
-    const { name, email, gender, password, age, city, is_married } = req.body;
+    const { name, email,  password,  } = req.body;
 
     try {
         const userPresent = await userModel.find({ email });
@@ -23,7 +23,7 @@ userRouter.post("/register", async(req, res) => {
                 if (err) {
                     res.send({ "msg": err })
                 } else {
-                    const user = new userModel({ name, email, gender, password: hash, age, city, is_married })
+                    const user = new userModel({ name, email,password: hash})
                     await user.save();
                     res.send({ "msg": "A new user has been registered" }).status(200)
                 }
